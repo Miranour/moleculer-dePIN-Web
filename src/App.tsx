@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { ProtectedRoute } from './components/ProtectedRoute'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import Lab from './pages/Lab'
+import Dashboard from './pages/dashboard'
+import Wallet from './pages/wallet'
 import './App.css'
 
 // Placeholder Pages
-const Dashboard = () => <div className="p-8"><h1>Dashboard</h1></div>
-const Wallet = () => <div className="p-8"><h1>Wallet</h1></div>
-const Lab = () => <div className="p-8"><h1>Molecular Lab</h1></div>
-const Login = () => <div className="p-8"><h1>Login</h1></div>
-const AdminLayout = ({ children }: { children: React.ReactNode }) => <div className="admin-layout">{children}</div>
+const AdminLayout = ({ children }: { children: React.ReactNode }) => <div className="admin-layout text-white">{children}</div>
 const AdminDashboard = () => <div>Admin Dashboard</div>
 
 function App() {
@@ -17,21 +19,26 @@ function App() {
         
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         
         {/* Researcher Routes */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/lab" element={<Lab />} />
+        <Route element={<ProtectedRoute allowedRoles={['researcher']} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/lab" element={<Lab />} />
+        </Route>
 
         {/* Admin Routes */}
-        <Route path="/admin/*" element={
-          <AdminLayout>
-            <Routes>
-              <Route path="/" element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-            </Routes>
-          </AdminLayout>
-        } />
+        <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="" element={
+            <AdminLayout>
+              <Routes>
+                <Route path="/" element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+              </Routes>
+            </AdminLayout>
+          } />
+        </Route>
       </Routes>
     </Router>
   )

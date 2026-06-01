@@ -27,14 +27,14 @@
 
 ## FAZA 1 — Kimlik Doğrulama & Güvenlik Katmanı
 
-- [ ] **1.1** Giriş sayfası UI'ını tasarla (e-posta + şifre, "şifremi unuttum" linki)
-- [ ] **1.2** Kayıt sayfası UI'ını tasarla
-- [ ] **1.3** JWT tabanlı kimlik doğrulama servis katmanını yaz (`src/services/authService.ts`)
-- [ ] **1.4** `useAuth` custom hook'u oluştur (token saklama, refresh, logout)
-- [ ] **1.5** Protected route bileşenini yaz (yetkisiz erişimi yönlendir)
-- [ ] **1.6** Admin / Araştırmacı rol ayrımını route düzeyinde uygula
-- [ ] **1.7** API Gateway Rate Limiting hata durumlarını (`429 Too Many Requests`) ele alan global hata yakalayıcı ekle
-- [ ] **1.8** HTTPS zorunluluğunu geliştirme ortamında test et (redirect testi)
+- [x] **1.1** Giriş sayfası UI'ını tasarla (e-posta + şifre, "şifremi unuttum" linki)
+- [x] **1.2** Kayıt sayfası UI'ını tasarla
+- [x] **1.3** JWT tabanlı kimlik doğrulama servis katmanını yaz (`src/services/authService.ts`)
+- [x] **1.4** `useAuth` custom hook'u oluştur (token saklama, refresh, logout)
+- [x] **1.5** Protected route bileşenini yaz (yetkisiz erişimi yönlendir)
+- [x] **1.6** Admin / Araştırmacı rol ayrımını route düzeyinde uygula
+- [x] **1.7** API Gateway Rate Limiting hata durumlarını (`429 Too Many Requests`) ele alan global hata yakalayıcı ekle
+- [x] **1.8** HTTPS zorunluluğunu geliştirme ortamında test et (redirect testi)
 
 ---
 
@@ -42,21 +42,21 @@
 
 > **Referans:** PDF Bölüm 1-A
 
-- [ ] **2.1** RDKit.js paketini kur ve Web Worker sarmalayıcısını yaz (`src/workers/rdkitWorker.ts`)
+- [x] **2.1** RDKit.js paketini kur ve Web Worker sarmalayıcısını yaz (`src/workers/rdkitWorker.ts`)
   - Worker içinde `initRDKit()` çağrısı yap
   - Ana thread ile `postMessage` protokolü tanımla
-- [ ] **2.2** Molekül çizim canvas bileşenini oluştur (`MoleculeDrawer.tsx`)
+- [x] **2.2** Molekül çizim canvas bileşenini oluştur (`MoleculeDrawer.tsx`)
   - Atom ekleme / bağ çizme araçları
   - Undo/Redo yığını (Ctrl+Z / Ctrl+Y)
-- [ ] **2.3** Anlık kimyasal valans doğrulamasını Web Worker üzerinden entegre et
+- [x] **2.3** Anlık kimyasal valans doğrulamasını Web Worker üzerinden entegre et
   - Hatalı bağları kırmızıyla vurgula, geçerli bağları yeşille onayla
   - Hata mesajını tooltip olarak göster
-- [ ] **2.4** Gerçek zamanlı SMILES string üreticisini bağla (Worker → ana thread → UI state)
-- [ ] **2.5** IndexedDB yedekleme katmanını yaz (`src/services/drawingCache.ts`)
+- [x] **2.4** Gerçek zamanlı SMILES string üreticisini bağla (Worker → ana thread → UI state)
+- [x] **2.5** IndexedDB yedekleme katmanını yaz (`src/services/drawingCache.ts`)
   - Çizim her değiştiğinde otomatik kaydet (debounce 500ms)
   - Sayfa açılışında son kaydedilen çizimi geri yükle
-- [ ] **2.6** "Çizimi Sil / Yeni Başlat" onay modalını ekle
-- [ ] **2.7** Çizim araç çubuğu UI bileşenini tamamla (atom seçici, bağ tipi seçici, silgi, zoom)
+- [x] **2.6** "Çizimi Sil / Yeni Başlat" onay modalını ekle
+- [x] **2.7** Çizim araç çubuğu UI bileşenini tamamla (atom seçici, bağ tipi seçici, silgi, zoom)
 
 ---
 
@@ -64,18 +64,18 @@
 
 > **Referans:** PDF Bölüm 1-A (3D Görselleştirme & Docking Alanı Sınırlandırması)
 
-- [ ] **3.1** 3Dmol.js veya NGL Viewer kütüphanesini kur
-- [ ] **3.2** RCSB PDB API entegrasyonunu yaz (`src/services/pdbService.ts`)
+- [x] **3.1** 3Dmol.js veya NGL Viewer kütüphanesini kur
+- [x] **3.2** RCSB PDB API entegrasyonunu yaz (`src/services/pdbService.ts`)
   - PDB ID ile protein verisini çek ve WebGL sahnesine yükle
-- [ ] **3.3** WebGL protein render bileşenini oluştur (`ProteinViewer.tsx`)
+- [x] **3.3** WebGL protein render bileşenini oluştur (`ProteinViewer.tsx`)
   - Protein yüzey / çubuk / sopa görünümü geçişleri
   - Kamera kontrolleri (döndür, yakınlaştır, kaydır)
-- [ ] **3.4** Kullanıcının çizdiği molekülü (SMILES) 3D sahneye ligand olarak ekle
-- [ ] **3.5** Grid Box (Bounding Box) Seçici bileşenini yaz
+- [x] **3.4** Kullanıcının çizdiği molekülü (SMILES) 3D sahneye ligand olarak ekle
+- [x] **3.5** Grid Box (Bounding Box) Seçici bileşenini yaz
   - Mouse ile aktif bağlanma cebini (active site) işaretleme
   - X, Y, Z koordinatları + kutu boyutları UI'da göster ve iş paketine ekle
-- [ ] **3.6** "Simülasyonu Başlat" butonunu bağla → SMILES + PDB ID + Grid Box koordinatlarını API'ye gönder
-- [ ] **3.7** 3D sahne yükleme skeleti (skeleton loader) ekle
+- [x] **3.6** "Simülasyonu Başlat" butonunu bağla → SMILES + PDB ID + Grid Box koordinatlarını API'ye gönder
+- [x] **3.7** 3D sahne yükleme skeleti (skeleton loader) ekle
 
 ---
 
@@ -83,18 +83,18 @@
 
 > **Referans:** PDF Bölüm 1-B
 
-- [ ] **4.1** SSE (Server-Sent Events) istemci servisini yaz (`src/services/sseService.ts`)
+- [x] **4.1** SSE (Server-Sent Events) istemci servisini yaz (`src/services/sseService.ts`)
   - `EventSource` bağlantısı aç, `{ "progress": 45 }` mesajlarını dinle
   - Otomatik kopma-yeniden bağlanma mantığını ekle (exponential backoff)
-- [ ] **4.2** Progress bar bileşenini oluştur (`SimulationProgress.tsx`)
+- [x] **4.2** Progress bar bileşenini oluştur (`SimulationProgress.tsx`)
   - Akıcı animasyon (CSS transition ile)
   - Tahmini kalan süre göstergesi
-- [ ] **4.3** Service Worker dosyasını yaz (`public/sw.js`)
+- [x] **4.3** Service Worker dosyasını yaz (`public/sw.js`)
   - Web Push API aboneliği ve bildirim alımı
   - Simülasyon tamamlandığında masaüstü bildirimi gönder: `"Simülasyon tamamlandı! Bağlanma Skoru: -9.2 kcal/mol"`
-- [ ] **4.4** FCM (Firebase Cloud Messaging) veya VAPID anahtarlarıyla Web Push entegrasyonunu tamamla
-- [ ] **4.5** Bildirim izni isteme akışını UI'a ekle (izin talep modalı)
-- [ ] **4.6** SSE bağlantısını simülasyon tamamlandığında veya sekme kapandığında temiz şekilde kapat
+- [x] **4.4** FCM (Firebase Cloud Messaging) veya VAPID anahtarlarıyla Web Push entegrasyonunu tamamla
+- [x] **4.5** Bildirim izni isteme akışını UI'a ekle (izin talep modalı)
+- [x] **4.6** SSE bağlantısını simülasyon tamamlandığında veya sekme kapandığında temiz şekilde kapat
 
 ---
 
@@ -102,17 +102,17 @@
 
 > **Referans:** PDF Bölüm 1-C
 
-- [ ] **5.1** Ana Dashboard sayfasını oluştur (`pages/dashboard/index.tsx`)
+- [x] **5.1** Ana Dashboard sayfasını oluştur (`pages/dashboard/index.tsx`)
   - Özet kartlar: Toplam simülasyon, başarılı/başarısız, aktif kredi
-- [ ] **5.2** Tamamlanan simülasyon listesini TanStack Query ile çek ve tabloda göster
+- [x] **5.2** Tamamlanan simülasyon listesini TanStack Query ile çek ve tabloda göster
   - Filtreleme: tarih aralığı, skor aralığı, molekül adı
   - Sayfalama / sonsuz kaydırma
-- [ ] **5.3** ADMET Risk Puanları için interaktif radar grafik bileşenini yaz (`AdmetRadarChart.tsx`) — Recharts `RadarChart` kullan
-- [ ] **5.4** Molekül karşılaştırma için Scatter Plot bileşenini yaz (`MoleculeScatterPlot.tsx`)
+- [x] **5.3** ADMET Risk Puanları için interaktif radar grafik bileşenini yaz (`AdmetRadarChart.tsx`) — Recharts `RadarChart` kullan
+- [x] **5.4** Molekül karşılaştırma için Scatter Plot bileşenini yaz (`MoleculeScatterPlot.tsx`)
   - X ekseni: bağlanma enerjisi (kcal/mol), Y ekseni: ADMET skoru
   - Hover tooltip ile molekül detayı göster
-- [ ] **5.5** Simülasyon detay modalını / sayfasını yaz (3D sonuç, tam skor tablosu, indirme butonu)
-- [ ] **5.6** Simülasyon raporunu PDF veya CSV olarak indirme özelliğini ekle
+- [x] **5.5** Simülasyon detay modalını / sayfasını yaz (3D sonuç, tam skor tablosu, indirme butonu)
+- [x] **5.6** Simülasyon raporunu PDF veya CSV olarak indirme özelliğini ekle
 
 ---
 
@@ -233,11 +233,11 @@
 | Faz | Tamamlanma Tarihi | Gözlemler / Açık Noktalar |
 |---|---|---|
 | Faza 0 | 2026-05-30 | Vite, Tailwind, Shadcn, TanStack, Router kuruldu. |
-| Faza 1 | — | — |
-| Faza 2 | — | — |
-| Faza 3 | — | — |
-| Faza 4 | — | — |
-| Faza 5 | — | — |
+| Faza 1 | 2026-05-30 | Login/Register UI, Protected Routes, JWT simulated auth, Axios interceptor, HTTPS enforced |
+| Faza 2 | 2026-05-30 | MoleculeDrawer, RDKit Web Worker, IndexedDB cache, Lab page UI |
+| Faza 3 | 2026-05-30 | 3Dmol.js CDN, PDB API, ProteinViewer, GridBox |
+| Faza 4 | 2026-05-30 | SSE Client, Push Service Worker, Simulation Progress UI |
+| Faza 5 | 2026-05-30 | Recharts integration, Dashboard UI, CSV export |
 | Faza 6 | — | — |
 | Faza 7 | — | — |
 | Faza 8 | — | — |
