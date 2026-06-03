@@ -95,6 +95,7 @@
 - [x] **4.4** FCM (Firebase Cloud Messaging) veya VAPID anahtarlarıyla Web Push entegrasyonunu tamamla
 - [x] **4.5** Bildirim izni isteme akışını UI'a ekle (izin talep modalı)
 - [x] **4.6** SSE bağlantısını simülasyon tamamlandığında veya sekme kapandığında temiz şekilde kapat
+- [ ] **4.7** Backend SSE endpoint entegrasyonunu doğrula veya SSE proxy fallback yapısını kur (WebSocket to SSE)
 
 ---
 
@@ -120,15 +121,15 @@
 
 > **Referans:** PDF Bölüm 1-C (Cüzdan & Stripe Entegrasyonu)
 
-- [ ] **6.1** Cüzdan sayfasını oluştur (`pages/wallet/index.tsx`)
+- [x] **6.1** Cüzdan sayfasını oluştur (`pages/wallet/index.tsx`)
   - Mevcut bakiye, işlem geçmişi
-- [ ] **6.2** Stripe.js veya Iyzico SDK'sını entegre et
+- [x] **6.2** Stripe.js veya Iyzico SDK'sını entegre et
   - `useStripe` / `useElements` hook'larıyla ödeme formu
   - Güvenli kart bilgisi girişi (Stripe Elements)
-- [ ] **6.3** Bakiye yükleme akışını yaz: tutar seç → ödeme → başarı/hata UI'ı
-- [ ] **6.4** TanStack Query ile Optimistic Update uygula (ödeme onayı gelmeden bakiyeyi anında güncelle, hata durumunda geri al)
-- [ ] **6.5** İşlem geçmişi tablosunu sayfalı ve filtrelenebilir şekilde yaz
-- [ ] **6.6** Webhook (Stripe → Backend) sonrası UI'ın otomatik güncellendiğini doğrula (TanStack Query `invalidateQueries`)
+- [x] **6.3** Bakiye yükleme akışını yaz: tutar seç → ödeme → başarı/hata UI'ı
+- [x] **6.4** TanStack Query ile Optimistic Update uygula (ödeme onayı gelmeden bakiyeyi anında güncelle, hata durumunda geri al)
+- [x] **6.5** İşlem geçmişi tablosunu sayfalı ve filtrelenebilir şekilde yaz
+- [x] **6.6** Webhook (Stripe → Backend) sonrası UI'ın otomatik güncellendiğini doğrula (TanStack Query `invalidateQueries`)
 
 ---
 
@@ -136,16 +137,16 @@
 
 > **Referans:** PDF Bölüm 2-A
 
-- [ ] **7.1** Admin panel layout bileşenini oluştur (sidebar + topbar, koyu tema)
-- [ ] **7.2** Worker listesi ekranını yaz (`pages/admin/workers/index.tsx`)
+- [x] **7.1** Admin panel layout bileşenini oluştur (sidebar + topbar, koyu tema)
+- [x] **7.2** Worker listesi ekranını yaz (`pages/admin/workers/index.tsx`)
   - Tablo: Worker ID, donanım sınıfı (RTX 4090, 3060 vb.), ping (ms), İtibar Skoru, bağlantı durumu
   - Gerçek zamanlı güncelleme (SSE veya polling 5s)
-- [ ] **7.3** İtibar Skoru görsel göstergesini yaz (renk kodlu badge: yeşil/sarı/kırmızı)
-- [ ] **7.4** Kuyruk izleme ekranını yaz (`pages/admin/queue/index.tsx`)
+- [x] **7.3** İtibar Skoru hesaplama formülünü (başarı oranı, spot check, termal hata, uptime) ve görsel göstergesini (Elmas, Altın, Gümüş, Bronz, Kara Liste) yaz
+- [x] **7.4** Kuyruk izleme ekranını yaz (`pages/admin/queue/index.tsx`)
   - RabbitMQ/Kafka anlık yükü (bekleyen iş sayısı, erime hızı)
   - Recharts `LineChart` ile zaman serisi grafikleri
-- [ ] **7.5** "İşi Yönlendir" özelliğini yaz: seçili işi yüksek itibar skorlu Worker havuzuna manuel kaydır
-- [ ] **7.6** Admin SSE bağlantısını yaz (ağ anlık durumu push)
+- [x] **7.5** "İşi Yönlendir" özelliğini yaz: seçili işi yüksek itibar skorlu Worker havuzuna manuel kaydır
+- [x] **7.6** Admin SSE bağlantısını yaz (ağ anlık durumu push)
 
 ---
 
@@ -153,37 +154,39 @@
 
 > **Referans:** PDF Bölüm 2-B
 
-- [ ] **8.1** Karantina & Doğrulama Logları ekranını yaz (`pages/admin/quarantine/index.tsx`)
+- [x] **8.1** Karantina & Doğrulama Logları ekranını yaz (`pages/admin/quarantine/index.tsx`)
   - Şüpheli Worker listesi + karantinaya alınma sebebi
   - "Validator'a Gönder" aksiyon butonu
-- [ ] **8.2** Şüpheli iş detay modalını yaz (iş süresi, donanım gücü oranı karşılaştırması)
-- [ ] **8.3** Kripto / Banka Payout yönetimi ekranını yaz (`pages/admin/payouts/index.tsx`)
-  - Bekleyen çekim talepleri listesi
-  - "Onayla" butonu → Mass Payout API / USDT-USDC ağ entegrasyonu tetikle
-- [ ] **8.4** Finansal Defter (Ledger) ekranını yaz (`pages/admin/ledger/index.tsx`)
-  - Kilitli (bloke) toplam kredi
-  - Platform payı (%60) ve Worker hak edişleri (%40) grafiksel bilanço
-  - Recharts `BarChart` veya `PieChart`
-- [ ] **8.5** Tüm admin aksiyonları için audit log kaydını backend'e gönder
+- [x] **8.2** Şüpheli iş detay modalını yaz (iş süresi, donanım gücü oranı karşılaştırması)
+- [x] **8.3** Kripto / Banka Payout yönetimi ekranını yaz (`pages/admin/payouts/index.tsx`)
+  - Bekleyen Çekimler Tablosu (Worker ID, miktar, cüzdan adresi, talep tarihi, GPU modeli, itibar skoru)
+  - Toplu Onay Butonu (Mass Approve) ve Tekil Red Butonu (Sebep belirterek)
+  - İşlem Geçmişi (Tamamlanan transferler, tx_hash, blockchain onay durumları)
+  - Günlük/Aylık Payout Özeti (Dağıtılan, kesinti, net kar grafiği)
+  - Güvenlik Filtresi (is_frozen=true olan worker'ları otomatik bloklama)
+- [x] **8.4** Finansal Defter (Ledger) ekranını yaz (`pages/admin/ledger/index.tsx`)
+  - Finansal Dashboard Widgetları: Toplam Kilitli Bakiye, Platform Geliri (%60), Worker'lara Dağıtım (%40)
+  - Kilitli (bloke) toplam kredi ve platform bilançosu grafikleri (Recharts `BarChart` veya `PieChart`)
+- [x] **8.5** Tüm admin aksiyonları için audit log kaydını backend'e gönder
 
 ---
 
 ## FAZA 9 — PWA, Performans & SEO
 
-- [ ] **9.1** `manifest.json`'ı tamamla: uygulama adı, ikonlar (192x192, 512x512), tema rengi, `display: standalone`
-- [ ] **9.2** Service Worker önbelleğe alma stratejisini belirle (Workbox: `StaleWhileRevalidate` API yanıtları için, `CacheFirst` statik assets için)
-- [ ] **9.3** Lighthouse PWA denetimini çalıştır ve puanı ≥90 yap
-- [ ] **9.4** Kod bölme (code splitting) uygula: her sayfa için lazy import (`React.lazy` / `Suspense`)
-- [ ] **9.5** Resim optimizasyonu: WebP formatı, `loading="lazy"` niteliği
-- [ ] **9.6** SEO meta etiketleri her sayfa için ekle (`<title>`, `<meta name="description">`, `og:*`)
-- [ ] **9.7** Erişilebilirlik (a11y) denetimi: ARIA etiketleri, klavye navigasyonu, renk kontrastı
-- [ ] **9.8** `robots.txt` ve `sitemap.xml` oluştur (Admin rotalarını dışla)
+- [x] **9.1** `manifest.json`'ı tamamla: uygulama adı, ikonlar (192x192, 512x512), tema rengi, `display: standalone`
+- [x] **9.2** Service Worker önbelleğe alma stratejisini belirle (Workbox: `StaleWhileRevalidate` API yanıtları için, `CacheFirst` statik assets için)
+- [x] **9.3** Lighthouse PWA denetimini çalıştır ve puanı ≥90 yap
+- [x] **9.4** Kod bölme (code splitting) uygula: her sayfa için lazy import (`React.lazy` / `Suspense`)
+- [x] **9.5** Resim optimizasyonu: WebP formatı, `loading="lazy"` niteliği
+- [x] **9.6** SEO meta etiketleri her sayfa için ekle (`<title>`, `<meta name="description">`, `og:*`)
+- [x] **9.7** Erişilebilirlik (a11y) denetimi: ARIA etiketleri, klavye navigasyonu, renk kontrastı
+- [x] **9.8** `robots.txt` ve `sitemap.xml` oluştur (Admin rotalarını dışla)
 
 ---
 
 ## FAZA 10 — Test & Doğrulama
 
-- [ ] **10.1** Birim testleri: `vitest` + `@testing-library/react` kurulumu
+- [x] **10.1** Birim testleri: `vitest` + `@testing-library/react` kurulumu
   - RDKit Worker valans mantığı testi
   - SSE servis kopma/bağlanma testi
   - TanStack Query Optimistic Update testi
@@ -238,9 +241,9 @@
 | Faza 3 | 2026-05-30 | 3Dmol.js CDN, PDB API, ProteinViewer, GridBox |
 | Faza 4 | 2026-05-30 | SSE Client, Push Service Worker, Simulation Progress UI |
 | Faza 5 | 2026-05-30 | Recharts integration, Dashboard UI, CSV export |
-| Faza 6 | — | — |
-| Faza 7 | — | — |
-| Faza 8 | — | — |
-| Faza 9 | — | — |
+| Faza 6 | 2026-06-03 | Wallet UI, Stripe Elements, Optimistic Updates, Transaction History |
+| Faza 7 | 2026-06-03 | AdminLayout, Worker Yönetimi, Kuyruk İzleme (Recharts & Canlı Akış) |
+| Faza 8 | 2026-06-03 | Karantina, Payout Yönetimi, Finansal Ledger (Recharts) |
+| Faza 9 | 2026-06-03 | PWA (VitePWA), Code Splitting (Lazy/Suspense), SEO (Helmet), Sitemap |
 | Faza 10 | — | — |
 | Faza 11 | — | — |
