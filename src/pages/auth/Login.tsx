@@ -8,6 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Activity, ArrowRight, Loader2, Lock, Mail } from 'lucide-react';
 
+import { GoogleLogin } from '@react-oauth/google';
+
 export default function Login() {
   const [email, setEmail] = useState('user@depin.com');
   const [password, setPassword] = useState('user123');
@@ -18,6 +20,21 @@ export default function Login() {
   const { login } = useAuth();
 
   const from = location.state?.from?.pathname || '/dashboard';
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    setIsLoading(true);
+    setError('');
+    try {
+      if (!credentialResponse.credential) throw new Error('Google Kimliği alınamadı.');
+      const response = await authService.googleLogin(credentialResponse.credential);
+      login(response.user, response.token);
+      navigate(from, { replace: true });
+    } catch (err: any) {
+      setError(err.message || 'Google ile giriş başarısız oldu.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,14 +74,36 @@ export default function Login() {
             <CardTitle className="text-xl">Hesabınıza Giriş Yapın</CardTitle>
             <CardDescription>Devam etmek için e-posta ve şifrenizi girin</CardDescription>
           </CardHeader>
+          <CardContent className="space-y-4">
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+
+            <div className="flex justify-center py-2">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => setError('Google girişi başlatılamadı.')}
+                theme="filled_black"
+                shape="rectangular"
+                width="100%"
+                text="signin_with"
+              />
+            </div>
+            
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-zinc-800" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-zinc-900 px-2 text-zinc-500">veya e-posta ile</span>
+              </div>
+            </div>
+          </CardContent>
+
           <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
-              {error && (
-                <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-md text-sm">
-                  {error}
-                </div>
-              )}
-              
+            <CardContent className="space-y-4 pt-0">
               <div className="space-y-2">
                 <Label htmlFor="email">E-posta</Label>
                 <div className="relative">

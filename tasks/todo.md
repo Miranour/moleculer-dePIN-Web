@@ -190,13 +190,13 @@
   - RDKit Worker valans mantığı testi
   - SSE servis kopma/bağlanma testi
   - TanStack Query Optimistic Update testi
-- [ ] **10.2** Entegrasyon testleri: Mock API (MSW) ile tam akış testi
+- [x] **10.2** Entegrasyon testleri: Mock API (MSW) ile tam akış testi
   - Giriş → Molekül çiz → Simülasyon başlat → Progress izle → Sonuç görüntüle
-- [ ] **10.3** E2E testleri: Playwright ile kritik kullanıcı yolculukları
+- [x] **10.3** E2E testleri: Playwright ile kritik kullanıcı yolculukları
   - Araştırmacı ödeme akışı
   - Admin payout onay akışı
-- [ ] **10.4** Performans testi: React DevTools Profiler ile re-render analizi
-- [ ] **10.5** Güvenlik testi: XSS, CSRF korumaları; Content Security Policy başlığı doğrula
+- [x] **10.4** Performans testi: React DevTools Profiler ile re-render analizi
+- [x] **10.5** Güvenlik testi: XSS, CSRF korumaları; Content Security Policy başlığı doğrula
 
 ---
 
@@ -245,5 +245,5 @@
 | Faza 7 | 2026-06-03 | AdminLayout, Worker Yönetimi, Kuyruk İzleme (Recharts & Canlı Akış) |
 | Faza 8 | 2026-06-03 | Karantina, Payout Yönetimi, Finansal Ledger (Recharts) |
 | Faza 9 | 2026-06-03 | PWA (VitePWA), Code Splitting (Lazy/Suspense), SEO (Helmet), Sitemap |
-| Faza 10 | — | — |
+| Faza 10 | 2026-06-04 | Gerçek API ile entegre E2E testleri eklendi, CSP konfigüre edildi, performans iyileştirildi. |
 | Faza 11 | — | — |

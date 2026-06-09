@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# dePINLab - Merkeziyetsiz Moleküler Simülasyon Platformu
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+dePINLab, araştırmacıların ve bilim insanlarının merkeziyetsiz bir ağ (dePIN) üzerinden moleküler simülasyon ve docking işlemlerini gerçekleştirebilecekleri modern bir web uygulamasıdır. Bu uygulama, dağıtık mimariyle ve yüksek performanslı backend servisleriyle uyumlu çalışacak şekilde tasarlanmıştır.
 
-Currently, two official plugins are available:
+## 🚀 Teknolojiler
+Bu proje, modern web standartlarına uygun olarak en güncel teknolojilerle geliştirilmiştir:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Core:** React 19, TypeScript, Vite
+- **State Management (Durum Yönetimi):** Zustand, TanStack React Query
+- **Styling (Tasarım):** Tailwind CSS, Shadcn UI, Lucide React
+- **Routing:** React Router v7
+- **Moleküler Modelleme:** 3Dmol.js, RDKit
+- **Ödemeler & Finans:** Stripe
+- **PWA (Progressive Web App):** Vite PWA Plugin
+- **Test:** Vitest, Playwright, React Testing Library
 
-## React Compiler
+## 📂 Proje Yapısı
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── assets/       # Statik dosyalar (Görseller, ikonlar vb.)
+├── components/   # Yeniden kullanılabilir UI bileşenleri (Shadcn UI vb.)
+├── hooks/        # Özelleştirilmiş (Custom) React Hook'ları
+├── integration/  # Dış entegrasyonlar (Stripe, Cüzdan bağlama vb.)
+├── lib/          # Yardımcı araçlar (utils) ve konfigürasyonlar
+├── mocks/        # Geliştirme aşaması için Mock veriler (MSW)
+├── pages/        # Ana sayfa bileşenleri ve yönlendirme (routing)
+├── services/     # API istekleri ve Backend haberleşmesi
+└── workers/      # Arayüzü dondurmamak için Web Worker'lar (Ağır hesaplamalar)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Kurulum ve Çalıştırma
+Projeyi yerel bilgisayarınızda (test ortamında) çalıştırmak için aşağıdaki adımları takip edin:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Gereksinimler
+- Node.js (v18 veya üzeri)
+- Backend servislerinin (Docker üzerinden) çalışıyor olması önerilir.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Adımlar
+1. Proje dizininde gerekli paketleri yükleyin:
+   ```bash
+   npm install
+   ```
+
+2. Geliştirme sunucusunu başlatın:
+   ```bash
+   npm run dev
+   ```
+
+3. Uygulamayı tarayıcınızda açın:
+   Geliştirme sunucusu genellikle `https://localhost:5173` adresinde başlar (Projeye Basic SSL eklentisi dahildir).
+
+## 🧪 Testler
+Projede yüksek kod kalitesini sağlamak adına kapsamlı test araçları bulunur:
+
+- **Birim (Unit) Testleri:** `npm run test` (Vitest & JSDOM kullanır)
+- **Uçtan Uca (E2E) Testleri:** Playwright kullanılarak test edilir. Raporları incelemek için `npx playwright show-report` komutunu kullanabilirsiniz.
+
+## 📦 Derleme (Build)
+Uygulamayı canlı (production) ortama hazırlamak için:
+```bash
+npm run build
 ```
+Bu komut, TypeScript hatalarını denetler (`tsc -b`) ve `dist` klasörü altında optimize edilmiş üretim dosyalarını oluşturur.

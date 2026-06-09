@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export interface User {
   id: string;
   email: string;
@@ -10,36 +12,55 @@ export interface AuthResponse {
   token: string;
 }
 
-// Simulated API calls for Phase 1
-export const authService = {
-  login: async (email: string, password: string):Promise<AuthResponse> => {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    if (email === 'admin@depin.com' && password === 'admin123') {
-      return {
-        user: { id: '1', email, role: 'admin', name: 'Admin User' },
-        token: 'mock-jwt-token-admin'
-      };
-    }
-    
-    if (email === 'user@depin.com' && password === 'user123') {
-      return {
-        user: { id: '2', email, role: 'researcher', name: 'Researcher User' },
-        token: 'mock-jwt-token-researcher'
-      };
-    }
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
 
-    throw new Error('Geçersiz e-posta veya şifre');
+export const authService = {
+  login: async (email: string, password: string): Promise<AuthResponse> => {
+    try {
+      const response = await axios.post<AuthResponse>(`${API_URL}/auth/login`, {
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token);
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        throw new Error(error.response.data.error);
+      }
+      throw new Error('Giriş yapılamadı, sunucuya ulaşılamıyor.');
+    }
   },
   
-  register: async (email: string, _password: string, name: string):Promise<AuthResponse> => {
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    return {
-      user: { id: '3', email, role: 'researcher', name },
-      token: 'mock-jwt-token-new'
-    };
+  register: async (email: string, password: string, name: string): Promise<AuthResponse> => {
+    try {
+      const response = await axios.post<AuthResponse>(`${API_URL}/auth/register`, {
+        email,
+        password,
+        name,
+      });
+      localStorage.setItem('token', response.data.token);
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        throw new Error(error.response.data.error);
+      }
+      throw new Error('Kayıt yapılamadı, sunucuya ulaşılamıyor.');
+    }
+  },
+
+  googleLogin: async (idToken: string): Promise<AuthResponse> => {
+    try {
+      const response = await axios.post<AuthResponse>(`${API_URL}/auth/google`, {
+        id_token: idToken,
+      });
+      localStorage.setItem('token', response.data.token);
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        throw new Error(error.response.data.error);
+      }
+      throw new Error('Google ile giriş yapılamadı.');
+    }
   },
 
   logout: () => {
